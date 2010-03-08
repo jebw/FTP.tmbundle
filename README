@@ -1,0 +1,7 @@
+This is a super simple FTP Bundle for Textmate
+
+You can add a hidden YAML file with some FTP settings in the TextMate Project
+root, editable from Bundles -> FTP -> Edit FTP Settings
+
+If this file is present in a Project, when you save a file, then it will also 
+be uploaded to the FTP server set in the YAML file.
