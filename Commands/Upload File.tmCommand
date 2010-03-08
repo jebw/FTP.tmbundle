@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>saveActiveFile</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+require 'net/ftp'
+require 'yaml'
+
+exit unless ENV['TM_PROJECT_DIRECTORY']
+
+ftp_settings_file = File.join(ENV['TM_PROJECT_DIRECTORY'], '.ftpmate.yml')
+exit if ENV['TM_FILEPATH'] == ftp_settings_file or not File.exist?(ftp_settings_file)
+
+local_path = ENV['TM_FILEPATH'].gsub(%r{^#{Regexp.escape(ENV['TM_PROJECT_DIRECTORY'])}}, '').gsub(/^\//, '')
+ftp_settings = YAML.load File.read(ftp_settings_file)
+remote_path = "#{ftp_settings[:path]}/#{local_path}".gsub(/\/+/, '/')
+
+begin
+	ftp = Net::FTP.new(ftp_settings[:server])
+	ftp.login(ftp_settings[:user], ftp_settings[:password])
+	ftp.put(ENV['TM_FILEPATH'], remote_path)
+
+	puts "UPLOADED #{local_path} TO #{remote_path}"
+rescue Net::FTPPermError =&gt; e
+	puts "FTP FAILED: #{e.message}"
+end</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@s</string>
+	<key>name</key>
+	<string>Upload File</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>uuid</key>
+	<string>199AB907-62C8-4682-9EBA-5119DC75FA65</string>
+</dict>
+</plist>

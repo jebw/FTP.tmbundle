@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>FTP</string>
+	<key>ordering</key>
+	<array>
+		<string>95FB02B0-5B38-4927-A05F-F8084F0675E1</string>
+		<string>199AB907-62C8-4682-9EBA-5119DC75FA65</string>
+	</array>
+	<key>uuid</key>
+	<string>3C3DA156-56EC-4F67-9BB1-2FF2016E6515</string>
+</dict>
+</plist>

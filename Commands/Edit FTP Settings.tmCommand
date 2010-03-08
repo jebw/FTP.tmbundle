@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+require 'yaml'
+
+unless ENV['TM_PROJECT_DIRECTORY'].strip! == ''
+	settings_file = File.join(ENV['TM_PROJECT_DIRECTORY'], '.ftpmate.yml')
+	File.open(settings_file, 'w') do |f|
+		YAML.dump({ :server =&gt; 'SERVER', :user =&gt; 'USER', :password =&gt; 'PASSWORD', :path =&gt; 'PATH'}, f)
+	end unless File.exist?(settings_file)
+
+	system("mate #{settings_file}")
+end
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>name</key>
+	<string>Edit FTP Settings</string>
+	<key>output</key>
+	<string>discard</string>
+	<key>uuid</key>
+	<string>95FB02B0-5B38-4927-A05F-F8084F0675E1</string>
+</dict>
+</plist>
